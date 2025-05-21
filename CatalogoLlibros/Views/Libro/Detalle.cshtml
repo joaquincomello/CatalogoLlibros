@@ -1,0 +1,27 @@
+﻿ @model CatalogoLlibros.Models.Libro
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Mensaje"]
+    </div>
+}
+<a asp-action="Editar" asp-route-id="@Model.id" class="btn btn-warning">
+    <i class="bi bi-pencil"></i> Editar
+</a>
+    <h2>Detalle del libro</h2>
+    <div class="Card p-3">
+        <p>
+            <strong> anio de publicacion</strong> @Model.anioPublicacion
+        </p>
+        <p>
+            <strong>autor</strong> @Model.autor.nombre
+
+
+    </div>
+    <a href="@Url.Action("Index", "Libro")" class="btn btn-primary">Volver al catálogo</a>
+@if (TempData["MensajeExito"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["MensajeExito"]
+    </div>
+}

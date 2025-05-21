@@ -1,0 +1,73 @@
+﻿<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"> </script>
+
+@model List<CatalogoLlibros.Models.Libro>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/estilos.css" />
+}
+
+<h2>Catálogo de Libros</h2>
+
+
+
+<table class="table">
+    
+        
+    <thead>
+        <tr>
+            <th>Portada</th>
+            <th>Título</th>
+            <th>Año</th>
+            <th>Autor</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <a class="btn btn-primary mb-3" href="@Url.Action("FiltrarPorAutor", "Libro")">Ver solo libros de George Orwell</a>
+        <a class="btn btn-secondary mb-3 ms-2" href="@Url.Action("Index", "Libro")">Ver todos los libros</a>
+
+        @foreach (var libro in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@libro.UrlImagen" alt="Portada de @libro.titulo" width="80" />
+                </td>
+                <td>@libro.titulo</td>
+                <td>@libro.anioPublicacion</td>
+                <td>@libro.autor.nombre</td>
+                <td>
+                    <a href="@Url.Action("Detalle", "Libro", new { id = libro.id })" class="btn btn-info">
+                        Ver detalles
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button onclick="cambiarFondo()" class="btn btn-primary">Cambiar color de fondo</button>
+
+@section Scripts {
+    <script>
+        function cambiarFondo() {   
+            
+            var body = document.body;
+            body.style.backgroundColor = body.style.backgroundColor === "violet" ? "white" : "violet";
+        }
+    </script>
+}
+<div class="d-flex gap-2 justify-content-center py-5">
+    <button class="btn btn-primary" type="button" disabled="">
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        <span class="visually-hidden" role="status">Loading...</span>
+    </button>
+    <button class="btn btn-primary" type="button" disabled="">
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        <span role="status">Loading...</span>
+    </button>
+</div>
+
+
+<a asp-controller="Libro" asp-action="Crear" class="btn btn-primary">Crear nuevo libro</a>

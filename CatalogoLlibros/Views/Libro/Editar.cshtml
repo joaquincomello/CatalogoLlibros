@@ -1,0 +1,51 @@
+﻿@model Libro
+
+@{
+    ViewData["Title"] = "Editar Libro";
+    Layout = "_Layout";
+}
+
+<h2>Editar Libro</h2>
+
+<form asp-action="Editar" method="post">
+    <input type="hidden" asp-for="id" />
+
+    <div class="mb-3">
+        <label asp-for="titulo"></label>
+        <input asp-for="titulo" class="form-control" />
+        <span asp-validation-for="titulo" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="anioPublicacion"></label>
+        <input asp-for="anioPublicacion" class="form-control" />
+        <span asp-validation-for="anioPublicacion" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label for="Autor">Autor</label>
+        <select asp-for="autor.id" class="form-select">
+            @foreach (var autor in ViewBag.Autores as List<Autor>)
+            {
+                <option value="@autor.id" selected="@(autor.id == Model.autor.id)">
+                    @autor.nombre
+                </option>
+            }
+        </select>
+        <span asp-validation-for="autor" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="UrlImagen"></label>
+        <input asp-for="UrlImagen" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        <i class="bi bi-pencil-square"></i> Guardar Cambios
+    </button>
+    <a asp-action="Index" class="btn btn-secondary">Volver al catálogo</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
