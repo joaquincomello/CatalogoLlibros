@@ -10,9 +10,9 @@ namespace CatalogoLlibros.Models
         [Required]
         public string titulo { get; set; }
 
-        [Range(1800, 2100)]
+        //[Range(1800, 2100)]
         [Required]
-        public int anioPublicacion { get; set; }
+        public DateTime anioPublicacion { get; set; }
 
        // [Required]
         public Autor autor { get; set; }
