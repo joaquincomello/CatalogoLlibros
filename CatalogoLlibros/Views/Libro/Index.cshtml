@@ -9,11 +9,15 @@
 
 <h2>Catálogo de Libros</h2>
 
-
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["Mensaje"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
 
 <table class="table">
-    
-        
     <thead>
         <tr>
             <th>Portada</th>
@@ -51,8 +55,7 @@
 
 @section Scripts {
     <script>
-        function cambiarFondo() {   
-            
+        function cambiarFondo() {
             var body = document.body;
             body.style.backgroundColor = body.style.backgroundColor === "violet" ? "white" : "violet";
         }
@@ -69,6 +72,3 @@
     </button>
     <a asp-controller="Libro" asp-action="Crear" class="btn btn-primary">Crear nuevo libro</a>
 </div>
-
-
-

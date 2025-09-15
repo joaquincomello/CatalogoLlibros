@@ -1,1 +1,71 @@
-﻿
+﻿@model List<CatalogoLlibros.Models.Libro>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/estilos.css" />
+}
+
+<h2>Catálogo de Libros</h2>
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["Mensaje"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Portada</th>
+            <th>Título</th>
+            <th>Año</th>
+            <th>Autor</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <a class="btn btn-primary mb-3" href="@Url.Action("FiltrarPorAutor", "Libro")">Ver solo libros de George Orwell</a>
+        <a class="btn btn-secondary mb-3 ms-2" href="@Url.Action("Index", "Libro")">Ver todos los libros</a>
+
+        @foreach (var libro in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@libro.UrlImagen" alt="Portada de @libro.titulo" width="80" />
+                </td>
+                <td>@libro.titulo</td>
+                <td>@libro.anioPublicacion</td>
+                <td>@libro.autor.nombre</td>
+                <td>
+                    <a href="@Url.Action("Detalle", "Libro", new { id = libro.id })" class="btn btn-info">
+                        Ver detalles
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button onclick="cambiarFondo()" class="btn btn-primary">Cambiar color de fondo</button>
+
+@section Scripts {
+    <script>
+        function cambiarFondo() {
+            var body = document.body;
+            body.style.backgroundColor = body.style.backgroundColor === "violet" ? "white" : "violet";
+        }
+    </script>
+}
+<div class="d-flex gap-2 justify-content-center py-5">
+    <button class="btn btn-primary" type="button" disabled="">
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        <span class="visually-hidden" role="status">Loading...</span>
+    </button>
+    <button class="btn btn-primary" type="button" disabled="">
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        <span role="status">Loading...</span>
+    </button>
+    <a asp-controller="Libro" asp-action="Crear" class="btn btn-primary">Crear nuevo libro</a>
+</div>

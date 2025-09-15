@@ -28,6 +28,12 @@
         <span asp-validation-for="anioPublicacion" class="text-danger"></span>
     </div>
 
+    <div class="mb-3">
+        <label asp-for="UrlImagen" class="form-label">URL de la Imagen</label>
+        <input asp-for="UrlImagen" class="form-control" placeholder="URL de la imagen" />
+        <span asp-validation-for="UrlImagen" class="text-danger"></span>
+    </div>
+
     <input type="submit" value="Crear Libro" class="btn btn-primary" />
     <a href="@Url.Action("Index", "Libro")" class="btn btn-secondary ms-2">Volver al catálogo</a>
 </form>

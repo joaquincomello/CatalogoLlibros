@@ -1,0 +1,20 @@
+﻿@model CatalogoLlibros.Models.Libro
+
+@{
+    ViewData["Title"] = "Confirmar Eliminación";
+    Layout = "_Layout";
+}
+
+<h2>¿Estás seguro de que deseas eliminar el libro <strong>@Model.titulo</strong>?</h2>
+
+<form asp-action="Eliminar" method="post">
+    <input type="hidden" asp-for="id" />
+
+    <button type="submit" class="btn btn-danger">
+        <i class="bi bi-trash"></i> Confirmar
+    </button>
+
+    <a asp-action="Detalle" asp-route-id="@Model.id" class="btn btn-secondary">
+        Cancelar
+    </a>
+</form>

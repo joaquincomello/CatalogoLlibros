@@ -24,26 +24,22 @@
 
     <div class="mb-3">
         <label for="autorId">Autor</label>
-        <select asp-for="autorId" class="form-select">
-            @foreach (var autor in ViewBag.Autores as List<Autor>)
-            {
-                <option value="@autor.id">@autor.nombre</option>
-            }
-        </select>
+        <select asp-for="autorId" class="form-select" asp-items="ViewBag.Autores"></select>
         <span asp-validation-for="autorId" class="text-danger"></span>
     </div>
 
-   <!-- <div class="mb-3">
+    <div class="mb-3">
         <label asp-for="UrlImagen"></label>
         <input asp-for="UrlImagen" class="form-control" />
-     </div>-->
+        <span asp-validation-for="UrlImagen" class="text-danger"></span>
+    </div>
 
     <button type="submit" class="btn btn-primary">
         <i class="bi bi-pencil-square"></i> Guardar Cambios
     </button>
     <a asp-action="Index" class="btn btn-secondary">Volver al catálogo</a>
 </form>
- 
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
